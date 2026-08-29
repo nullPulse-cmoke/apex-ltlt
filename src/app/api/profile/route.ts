@@ -44,19 +44,28 @@ export async function PATCH(request: Request) {
       }
     }
 
+    // Get current user to compare email
+    const currentUser = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { email: true },
+    })
+
     if (body.email) {
       const email = body.email.trim().toLowerCase()
-      if (!email.includes('@') || !email.includes('.')) {
-        return NextResponse.json({ error: 'Invalid email address' }, { status: 400 })
+      // Only validate if the email actually changed
+      if (email !== currentUser?.email) {
+        if (!email.includes('@') || !email.includes('.')) {
+          return NextResponse.json({ error: 'Please enter a valid email address (e.g. you@gmail.com)' }, { status: 400 })
+        }
+        // Check if email is taken
+        const existingUser = await prisma.user.findUnique({
+          where: { email }
+        })
+        if (existingUser && existingUser.id !== session.user.id) {
+          return NextResponse.json({ error: 'Email address is already in use' }, { status: 400 })
+        }
+        updateData.email = email
       }
-      // Check if email is taken
-      const existingUser = await prisma.user.findUnique({
-        where: { email }
-      })
-      if (existingUser && existingUser.id !== session.user.id) {
-        return NextResponse.json({ error: 'Email address is already in use' }, { status: 400 })
-      }
-      updateData.email = email
     }
 
     if ('telegramHandle' in body) {
