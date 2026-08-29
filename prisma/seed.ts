@@ -181,6 +181,514 @@ async function main() {
         techStack: JSON.stringify(['React', 'TypeScript']),
       },
     }),
+
+    prisma.user.create({
+      data: {
+        email: "shaxzoda_3@apex.uz",
+        passwordHash,
+        fullName: "Shaxzoda Yusupova",
+        region: "BUKHARA",
+        role: "PM",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Project Management No experience/coursera certificate",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "ibrohimov_4@apex.uz",
+        passwordHash,
+        fullName: "Ibrohimov Farrux",
+        region: "FERGANA",
+        role: "BACKEND",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Frontend developer Backend(+-) Intermediate",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "safron_5@apex.uz",
+        passwordHash,
+        fullName: "Safron Raxmonkulov",
+        region: "NAMANGAN",
+        role: "CYBERSECURITY",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Direction: cybersecury, data analysis and Creator. No experience yet🎬",
+        techStack: JSON.stringify(['Cybersecurity']),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "samandar_6@apex.uz",
+        passwordHash,
+        fullName: "Samandar",
+        region: "JIZZAKH",
+        role: "AI_ML",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Backend Frontend (with AI) Intermediate",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "javohir_7@apex.uz",
+        passwordHash,
+        fullName: "Javohir Rustamjonov",
+        region: "KHOREZM",
+        role: "FULLSTACK",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Full-Stack Developer Beginner",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "mirafzal_8@apex.uz",
+        passwordHash,
+        fullName: "Mirafzal Rustamjonov",
+        region: "NAVOIY",
+        role: "CYBERSECURITY",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Backend dev/ Cybersecurity Intermediate",
+        techStack: JSON.stringify(['Cybersecurity']),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "elbek_9@apex.uz",
+        passwordHash,
+        fullName: "Elbek Aliyev",
+        region: "KASHKADARYA",
+        role: "AI_ML",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Backend Frontend (AI) Intermediate",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "abdulloh_10@apex.uz",
+        passwordHash,
+        fullName: "Abdulloh",
+        region: "TASHKENT",
+        role: "BACKEND",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Backend developer(Django, DRF) Intermediate",
+        techStack: JSON.stringify(['Django', 'Django Rest Framework']),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "akbarov_11@apex.uz",
+        passwordHash,
+        fullName: "Akbarov Diyorbek",
+        region: "ANDIJAN",
+        role: "AI_ML",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "AI/ML no experience, Beginner",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "azimboyev_12@apex.uz",
+        passwordHash,
+        fullName: "Azimboyev Faxriyor",
+        region: "SAMARKAND",
+        role: "BACKEND",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Backend & vibe coder(recently tried) Intermediate",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "muhammadqodir_13@apex.uz",
+        passwordHash,
+        fullName: "Muhammadqodir Turobov",
+        region: "BUKHARA",
+        role: "PM",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Mobile development No experience Learning DSA so i don't know how to build apps yet",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "roxmatullox_14@apex.uz",
+        passwordHash,
+        fullName: "Roxmatullox Shirinov",
+        region: "FERGANA",
+        role: "AI_ML",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Frontend Dev ML Engineer Intermediate",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "obidov_15@apex.uz",
+        passwordHash,
+        fullName: "Obidov Nabijon",
+        region: "NAMANGAN",
+        role: "CYBERSECURITY",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Frontend, Cybersecurity Intermediate, Beginner",
+        techStack: JSON.stringify(['Cybersecurity']),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "abdumajidov_16@apex.uz",
+        passwordHash,
+        fullName: "Abdumajidov Sardor",
+        region: "JIZZAKH",
+        role: "CYBERSECURITY",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Frontend dev (beginner) Cybersecurity red teamer (beginner)",
+        techStack: JSON.stringify(['Cybersecurity']),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "behruz_17@apex.uz",
+        passwordHash,
+        fullName: "Behruz O'ktamboyev",
+        region: "KHOREZM",
+        role: "PM",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Frontend( also vibe-coder ) /Video Editor/Content Creator(in youtube, podcasts), Project manager Beginner/Intermediate(over year of experience) /Inter",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "baxodirov_18@apex.uz",
+        passwordHash,
+        fullName: "Baxodirov Muhammadamin",
+        region: "NAVOIY",
+        role: "AI_ML",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Backend develop+ learning frontend too(with AI). have some experience creating sites Intermediate",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "akbar_20@apex.uz",
+        passwordHash,
+        fullName: "Akbar Mamayusupov",
+        region: "TASHKENT",
+        role: "AI_ML",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Backend (Beginner) Frontend (AI)(Intermediate)",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "nodira_21@apex.uz",
+        passwordHash,
+        fullName: "Nodira Qodirova",
+        region: "ANDIJAN",
+        role: "BACKEND",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "backend developer beginner",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "soginchbek_22@apex.uz",
+        passwordHash,
+        fullName: "Sog'inchbek",
+        region: "SAMARKAND",
+        role: "PM",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Project manager , beginner / I work with ai , one of them on bio and I wanna learn video/motion design, also one of my goals is learning coding.",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "xamidov_24@apex.uz",
+        passwordHash,
+        fullName: "Xamidov Abdulaziz",
+        region: "FERGANA",
+        role: "CYBERSECURITY",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Software engineer, cybersecurity (red team) No experience",
+        techStack: JSON.stringify(['Cybersecurity']),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "ozodov_27@apex.uz",
+        passwordHash,
+        fullName: "Ozodov NurAziz",
+        region: "KHOREZM",
+        role: "DESIGNER",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Cyber Security (red team) / Graphic Designer Beginner / Intermediate ( + OSINT knowledge )",
+        techStack: JSON.stringify(['Cybersecurity']),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "davron_28@apex.uz",
+        passwordHash,
+        fullName: "Davron Yuldashbaev",
+        region: "NAVOIY",
+        role: "MOBILE",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Direction: Flutter Experience level: No experience yet )",
+        techStack: JSON.stringify(['Flutter']),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "abdullayev_31@apex.uz",
+        passwordHash,
+        fullName: "Abdullayev Akobir",
+        region: "ANDIJAN",
+        role: "AI_ML",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Full-Stack Developer  AIML Engineer Intermediate",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "siddiqjonov_32@apex.uz",
+        passwordHash,
+        fullName: "Siddiqjonov Suhrobbek",
+        region: "SAMARKAND",
+        role: "AI_ML",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Backend developer AI engineer (intern)",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "komron_33@apex.uz",
+        passwordHash,
+        fullName: "Komron",
+        region: "BUKHARA",
+        role: "DESIGNER",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Designer, sales, business analytics, marketing Lower intermediate",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "shohjahon_34@apex.uz",
+        passwordHash,
+        fullName: "Shohjahon",
+        region: "FERGANA",
+        role: "DATA_ANALYST",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "-Data/Business analysis -No experience",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "muhammad_35@apex.uz",
+        passwordHash,
+        fullName: "Muhammad Fazliddin Samadov",
+        region: "NAMANGAN",
+        role: "DESIGNER",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Figma Ui/UX designer(intermediate) Cybersec student(beginner/no exp at real projects) Frontend experience (middle)",
+        techStack: JSON.stringify(['Figma', 'Cybersecurity']),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "valiyev_36@apex.uz",
+        passwordHash,
+        fullName: "Valiyev Jasurbek",
+        region: "JIZZAKH",
+        role: "AI_ML",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Ai engineer No experience",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "yarasheva_37@apex.uz",
+        passwordHash,
+        fullName: "Yarasheva Rayhona",
+        region: "KHOREZM",
+        role: "AI_ML",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Backend and Frontend (AI)  (Intermediate), content creator (Beginner) , Mobile Developer( No experience at Projects)",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "ezoza_40@apex.uz",
+        passwordHash,
+        fullName: "Ezoza Zaxidova",
+        region: "TASHKENT",
+        role: "FRONTEND",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Frontend Developer No experience",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "islombek_41@apex.uz",
+        passwordHash,
+        fullName: "Islombek Abdumutalibov",
+        region: "ANDIJAN",
+        role: "DESIGNER",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Frontend Developer (Intermediate), UI/UX Designer (Beginner), Data Analyst (Advanced), Business Analyst (Advanced), Marketing (Advanced)",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "hasanxon_42@apex.uz",
+        passwordHash,
+        fullName: "Hasanxon Savriddinov",
+        region: "SAMARKAND",
+        role: "CYBERSECURITY",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Backend(.NET), Cybersecurity Specialist(Red Team) Experience: Intermediate",
+        techStack: JSON.stringify(['Cybersecurity']),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "full_47@apex.uz",
+        passwordHash,
+        fullName: "Full  Abadov Faridun",
+        region: "KHOREZM",
+        role: "PM",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Direction: Project manager, Business Analyst, Marketing, Sales, Client Outreach Experience level: advanced",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "shohruh_48@apex.uz",
+        passwordHash,
+        fullName: "Shohruh O'sarov",
+        region: "NAVOIY",
+        role: "AI_ML",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Ai engineering Video editor No  experience",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "akmalnorkulovv_49@apex.uz",
+        passwordHash,
+        fullName: "akmal_norkulovv",
+        region: "KASHKADARYA",
+        role: "FRONTEND",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "@Iradaa10 @diyorakkk @Bagaysay @sheght You sent your direction and experience level, but the surname is still missing. To avoid mixing up people with ",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "umarov_50@apex.uz",
+        passwordHash,
+        fullName: "Umarov Abdulloh",
+        region: "TASHKENT",
+        role: "BACKEND",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Backend developer(Django, DRF) Intermediate",
+        techStack: JSON.stringify(['Django', 'Django Rest Framework']),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "rahim_51@apex.uz",
+        passwordHash,
+        fullName: "Rahim Rakhimov",
+        region: "ANDIJAN",
+        role: "AI_ML",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "AI/ML engineer Experience: Beginner",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "goyibnazarov_52@apex.uz",
+        passwordHash,
+        fullName: "G'oyibnazarov Sohibjon",
+        region: "SAMARKAND",
+        role: "FRONTEND",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Agriculture and space rocket engineer Experience:done a number of projects",
+        techStack: JSON.stringify([]),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "husniyor_54@apex.uz",
+        passwordHash,
+        fullName: "Husniyor Azimboyev",
+        region: "FERGANA",
+        role: "BACKEND",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "Back-end developer(Python/Django/Fastapi/Flask) + Some VibeCoding Front-end experience. Experience: Beginner(have bunch of pet-projects and replicas o",
+        techStack: JSON.stringify(['Django', 'Python']),
+      }
+    }),
   ])
 
   console.log(`✅ Created ${users.length} users`)
