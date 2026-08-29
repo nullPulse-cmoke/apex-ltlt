@@ -256,7 +256,12 @@ export function AdminPanelClient({
       })
       if (!res.ok) {
         const body = await res.json()
-        setError(body.error || 'Failed to create program')
+        if (body.details && body.details.issues) {
+          const errMsgs = body.details.issues.map((i: any) => `${i.path.join('.')}: ${i.message}`).join(', ')
+          setError(`Validation failed: ${errMsgs}`)
+        } else {
+          setError(body.error || 'Failed to create program')
+        }
       } else {
         setMessage('Client program sprint published successfully')
         resetProgram()
@@ -270,6 +275,7 @@ export function AdminPanelClient({
   }
 
   const openEditModal = (prog: Program) => {
+    setError('')
     setSelectedProgram(prog)
     let parsedTech = ''
     try {
@@ -306,7 +312,12 @@ export function AdminPanelClient({
       })
       if (!res.ok) {
         const body = await res.json()
-        setError(body.error || 'Failed to update program')
+        if (body.details && body.details.issues) {
+          const errMsgs = body.details.issues.map((i: any) => `${i.path.join('.')}: ${i.message}`).join(', ')
+          setError(`Validation failed: ${errMsgs}`)
+        } else {
+          setError(body.error || 'Failed to update program')
+        }
       } else {
         setMessage('Client program updated successfully')
         setEditProgramModalOpen(false)
@@ -678,7 +689,7 @@ export function AdminPanelClient({
                 Delete Selected ({selectedProgramIds.length})
               </Button>
             )}
-            <Button onClick={() => setProgramModalOpen(true)} className="w-fit">
+            <Button onClick={() => { setError(''); setProgramModalOpen(true); }} className="w-fit">
               <Plus className="h-4 w-4" />
               Add Client Program
             </Button>
@@ -1019,6 +1030,11 @@ export function AdminPanelClient({
               Add Client Program Sprint
             </h3>
             <form onSubmit={handleProgramSubmit(onCreateProgram)} className="space-y-4">
+              {error && (
+                <div className="p-3 rounded-lg bg-[var(--red)]/10 border border-[var(--red)]/20 text-[var(--red)] text-xs">
+                  {error}
+                </div>
+              )}
               <Input id="prog-title" label="Program Title" placeholder="Cafe Digital Menu Sprint" {...regProgram('title')} />
               <Textarea id="prog-desc" label="Description" placeholder="Detail the client requirements, context, and goals..." className="min-h-[100px]" {...regProgram('description')} />
               <div className="grid grid-cols-2 gap-3">
@@ -1067,6 +1083,11 @@ export function AdminPanelClient({
               Edit Client Program Sprint
             </h3>
             <form onSubmit={handleEditProgramSubmit(onEditProgram)} className="space-y-4">
+              {error && (
+                <div className="p-3 rounded-lg bg-[var(--red)]/10 border border-[var(--red)]/20 text-[var(--red)] text-xs">
+                  {error}
+                </div>
+              )}
               <Input id="edit-prog-title" label="Program Title" placeholder="Cafe Digital Menu Sprint" {...regEditProgram('title')} />
               <Textarea id="edit-prog-desc" label="Description" placeholder="Detail the client requirements..." className="min-h-[100px]" {...regEditProgram('description')} />
               
