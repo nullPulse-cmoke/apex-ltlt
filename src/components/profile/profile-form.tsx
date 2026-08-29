@@ -218,9 +218,9 @@ export function ProfileForm({ user }: ProfileFormProps) {
                 <Input id="profile-name" label="Full Name" disabled {...register('fullName')} />
                 <Input
                   id="profile-email"
-                  label="Email Address (Required)"
+                  label="Login / Email (Required)"
                   required
-                  type="email"
+                  type="text"
                   {...register('email')}
                 />
                 <Input

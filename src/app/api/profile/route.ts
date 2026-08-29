@@ -54,15 +54,17 @@ export async function PATCH(request: Request) {
       const email = body.email.trim().toLowerCase()
       // Only validate if the email actually changed
       if (email !== currentUser?.email) {
-        if (!email.includes('@') || !email.includes('.')) {
-          return NextResponse.json({ error: 'Please enter a valid email address (e.g. you@gmail.com)' }, { status: 400 })
+        const isValidEmail = email.includes('@') && email.includes('.')
+        const isValidNickname = /^[a-zA-Z0-9_]{3,30}$/.test(email)
+        if (!isValidEmail && !isValidNickname) {
+          return NextResponse.json({ error: 'Login must be a valid email or username (3-30 characters, alphanumeric/underscores)' }, { status: 400 })
         }
         // Check if email is taken
         const existingUser = await prisma.user.findUnique({
           where: { email }
         })
         if (existingUser && existingUser.id !== session.user.id) {
-          return NextResponse.json({ error: 'Email address is already in use' }, { status: 400 })
+          return NextResponse.json({ error: 'Login or email is already in use' }, { status: 400 })
         }
         updateData.email = email
       }
