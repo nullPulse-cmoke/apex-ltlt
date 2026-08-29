@@ -50,7 +50,7 @@ export default function LoginPage() {
     })
 
     if (result?.error) {
-      setError('Invalid email or password')
+      setError('Invalid login or password')
       setLoading(false)
     } else {
       if (typeof window !== 'undefined') {
@@ -81,9 +81,9 @@ export default function LoginPage() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <Input
           id="login-email"
-          type="email"
-          label="Email"
-          placeholder="you@example.com"
+          type="text"
+          label="Login / Email"
+          placeholder="your login or email"
           error={errors.email?.message}
           icon={<Mail className="h-4 w-4" />}
           {...register('email')}

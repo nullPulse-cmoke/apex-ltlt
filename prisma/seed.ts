@@ -7,19 +7,63 @@ async function main() {
   console.log('🌱 Seeding database...')
 
   // Clean existing data
+  await prisma.notification.deleteMany()
   await prisma.xpLedger.deleteMany()
   await prisma.application.deleteMany()
   await prisma.program.deleteMany()
   await prisma.user.deleteMany()
 
-  // Create users
-  const passwordHash = await bcrypt.hash('password123', 12)
+  // Admin password
+  const adminHash = await bcrypt.hash('password123', 12)
+
+  // Volunteer passwords
+  const volPasswords = await Promise.all([
+    bcrypt.hash('nvjv23', 12),
+    bcrypt.hash('vghc01', 12),
+    bcrypt.hash('rzge39', 12),
+    bcrypt.hash('lorw33', 12),
+    bcrypt.hash('jtwc25', 12),
+    bcrypt.hash('yjsz80', 12),
+    bcrypt.hash('tuoc02', 12),
+    bcrypt.hash('lfjm50', 12),
+    bcrypt.hash('xagm79', 12),
+    bcrypt.hash('gihe51', 12),
+    bcrypt.hash('reuv67', 12),
+    bcrypt.hash('iayv94', 12),
+    bcrypt.hash('lyhk11', 12),
+    bcrypt.hash('autc47', 12),
+    bcrypt.hash('gwtd77', 12),
+    bcrypt.hash('stfh07', 12),
+    bcrypt.hash('jngl51', 12),
+    bcrypt.hash('xhlx81', 12),
+    bcrypt.hash('jkyn68', 12),
+    bcrypt.hash('hwwy62', 12),
+    bcrypt.hash('jakj66', 12),
+    bcrypt.hash('swlj59', 12),
+    bcrypt.hash('dutr80', 12),
+    bcrypt.hash('ukcf62', 12),
+    bcrypt.hash('uxqg38', 12),
+    bcrypt.hash('gigr22', 12),
+    bcrypt.hash('gzbh24', 12),
+    bcrypt.hash('efbp51', 12),
+    bcrypt.hash('hmbc97', 12),
+    bcrypt.hash('erxq60', 12),
+    bcrypt.hash('tikw28', 12),
+    bcrypt.hash('tvgs12', 12),
+    bcrypt.hash('gaji95', 12),
+    bcrypt.hash('bbfq08', 12),
+    bcrypt.hash('vquz00', 12),
+    bcrypt.hash('cgbl88', 12),
+    bcrypt.hash('zlad29', 12),
+    bcrypt.hash('niuj88', 12),
+    bcrypt.hash('ctug63', 12),
+  ])
 
   const users = await Promise.all([
     prisma.user.create({
       data: {
         email: 'admin@apex.uz',
-        passwordHash,
+        passwordHash: adminHash,
         fullName: 'Admin User',
         role: 'ADMIN',
         tier: 'GOLD_LEAD',
@@ -31,7 +75,7 @@ async function main() {
     prisma.user.create({
       data: {
         email: 'founder@apex.uz',
-        passwordHash,
+        passwordHash: adminHash,
         fullName: 'Founder / CEO',
         role: 'ADMIN',
         tier: 'GOLD_LEAD',
@@ -42,8 +86,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "shaxzoda_3@apex.uz",
-        passwordHash,
+        email: "shaxzoda1",
+        passwordHash: volPasswords[0],
         fullName: "Shaxzoda Yusupova",
         region: "BUKHARA",
         role: "PM",
@@ -55,8 +99,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "ibrohimov_4@apex.uz",
-        passwordHash,
+        email: "ibrohimov2",
+        passwordHash: volPasswords[1],
         fullName: "Ibrohimov Farrux",
         region: "FERGANA",
         role: "BACKEND",
@@ -68,8 +112,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "safron_5@apex.uz",
-        passwordHash,
+        email: "safron3",
+        passwordHash: volPasswords[2],
         fullName: "Safron Raxmonkulov",
         region: "NAMANGAN",
         role: "CYBERSECURITY",
@@ -81,8 +125,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "samandar_6@apex.uz",
-        passwordHash,
+        email: "samandar4",
+        passwordHash: volPasswords[3],
         fullName: "Samandar",
         region: "JIZZAKH",
         role: "AI_ML",
@@ -94,8 +138,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "javohir_7@apex.uz",
-        passwordHash,
+        email: "javohir5",
+        passwordHash: volPasswords[4],
         fullName: "Javohir Rustamjonov",
         region: "KHOREZM",
         role: "FULLSTACK",
@@ -107,8 +151,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "mirafzal_8@apex.uz",
-        passwordHash,
+        email: "mirafzal6",
+        passwordHash: volPasswords[5],
         fullName: "Mirafzal Rustamjonov",
         region: "NAVOIY",
         role: "CYBERSECURITY",
@@ -120,8 +164,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "elbek_9@apex.uz",
-        passwordHash,
+        email: "elbek7",
+        passwordHash: volPasswords[6],
         fullName: "Elbek Aliyev",
         region: "KASHKADARYA",
         role: "AI_ML",
@@ -133,8 +177,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "abdulloh_10@apex.uz",
-        passwordHash,
+        email: "abdulloh8",
+        passwordHash: volPasswords[7],
         fullName: "Abdulloh",
         region: "TASHKENT",
         role: "BACKEND",
@@ -146,8 +190,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "akbarov_11@apex.uz",
-        passwordHash,
+        email: "akbarov9",
+        passwordHash: volPasswords[8],
         fullName: "Akbarov Diyorbek",
         region: "ANDIJAN",
         role: "AI_ML",
@@ -159,8 +203,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "azimboyev_12@apex.uz",
-        passwordHash,
+        email: "azimboyev10",
+        passwordHash: volPasswords[9],
         fullName: "Azimboyev Faxriyor",
         region: "SAMARKAND",
         role: "BACKEND",
@@ -172,8 +216,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "muhammadqodir_13@apex.uz",
-        passwordHash,
+        email: "muhammadqodir11",
+        passwordHash: volPasswords[10],
         fullName: "Muhammadqodir Turobov",
         region: "BUKHARA",
         role: "PM",
@@ -185,8 +229,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "roxmatullox_14@apex.uz",
-        passwordHash,
+        email: "roxmatullox12",
+        passwordHash: volPasswords[11],
         fullName: "Roxmatullox Shirinov",
         region: "FERGANA",
         role: "AI_ML",
@@ -198,8 +242,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "obidov_15@apex.uz",
-        passwordHash,
+        email: "obidov13",
+        passwordHash: volPasswords[12],
         fullName: "Obidov Nabijon",
         region: "NAMANGAN",
         role: "CYBERSECURITY",
@@ -211,8 +255,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "abdumajidov_16@apex.uz",
-        passwordHash,
+        email: "abdumajidov14",
+        passwordHash: volPasswords[13],
         fullName: "Abdumajidov Sardor",
         region: "JIZZAKH",
         role: "CYBERSECURITY",
@@ -224,8 +268,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "behruz_17@apex.uz",
-        passwordHash,
+        email: "behruz15",
+        passwordHash: volPasswords[14],
         fullName: "Behruz O'ktamboyev",
         region: "KHOREZM",
         role: "PM",
@@ -237,8 +281,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "baxodirov_18@apex.uz",
-        passwordHash,
+        email: "baxodirov16",
+        passwordHash: volPasswords[15],
         fullName: "Baxodirov Muhammadamin",
         region: "NAVOIY",
         role: "AI_ML",
@@ -250,8 +294,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "akbar_20@apex.uz",
-        passwordHash,
+        email: "akbar17",
+        passwordHash: volPasswords[16],
         fullName: "Akbar Mamayusupov",
         region: "TASHKENT",
         role: "AI_ML",
@@ -263,8 +307,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "nodira_21@apex.uz",
-        passwordHash,
+        email: "nodira18",
+        passwordHash: volPasswords[17],
         fullName: "Nodira Qodirova",
         region: "ANDIJAN",
         role: "BACKEND",
@@ -276,8 +320,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "soginchbek_22@apex.uz",
-        passwordHash,
+        email: "soginchbek19",
+        passwordHash: volPasswords[18],
         fullName: "Sog'inchbek",
         region: "SAMARKAND",
         role: "PM",
@@ -289,8 +333,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "xamidov_24@apex.uz",
-        passwordHash,
+        email: "xamidov20",
+        passwordHash: volPasswords[19],
         fullName: "Xamidov Abdulaziz",
         region: "FERGANA",
         role: "CYBERSECURITY",
@@ -302,8 +346,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "ozodov_27@apex.uz",
-        passwordHash,
+        email: "ozodov21",
+        passwordHash: volPasswords[20],
         fullName: "Ozodov NurAziz",
         region: "KHOREZM",
         role: "DESIGNER",
@@ -315,8 +359,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "davron_28@apex.uz",
-        passwordHash,
+        email: "davron22",
+        passwordHash: volPasswords[21],
         fullName: "Davron Yuldashbaev",
         region: "NAVOIY",
         role: "MOBILE",
@@ -328,8 +372,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "abdullayev_31@apex.uz",
-        passwordHash,
+        email: "abdullayev23",
+        passwordHash: volPasswords[22],
         fullName: "Abdullayev Akobir",
         region: "ANDIJAN",
         role: "AI_ML",
@@ -341,8 +385,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "siddiqjonov_32@apex.uz",
-        passwordHash,
+        email: "siddiqjonov24",
+        passwordHash: volPasswords[23],
         fullName: "Siddiqjonov Suhrobbek",
         region: "SAMARKAND",
         role: "AI_ML",
@@ -354,8 +398,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "komron_33@apex.uz",
-        passwordHash,
+        email: "komron25",
+        passwordHash: volPasswords[24],
         fullName: "Komron",
         region: "BUKHARA",
         role: "DESIGNER",
@@ -367,8 +411,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "shohjahon_34@apex.uz",
-        passwordHash,
+        email: "shohjahon26",
+        passwordHash: volPasswords[25],
         fullName: "Shohjahon",
         region: "FERGANA",
         role: "DATA_ANALYST",
@@ -380,8 +424,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "muhammad_35@apex.uz",
-        passwordHash,
+        email: "muhammad27",
+        passwordHash: volPasswords[26],
         fullName: "Muhammad Fazliddin Samadov",
         region: "NAMANGAN",
         role: "DESIGNER",
@@ -393,8 +437,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "valiyev_36@apex.uz",
-        passwordHash,
+        email: "valiyev28",
+        passwordHash: volPasswords[27],
         fullName: "Valiyev Jasurbek",
         region: "JIZZAKH",
         role: "AI_ML",
@@ -406,8 +450,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "yarasheva_37@apex.uz",
-        passwordHash,
+        email: "yarasheva29",
+        passwordHash: volPasswords[28],
         fullName: "Yarasheva Rayhona",
         region: "KHOREZM",
         role: "AI_ML",
@@ -419,8 +463,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "ezoza_40@apex.uz",
-        passwordHash,
+        email: "ezoza30",
+        passwordHash: volPasswords[29],
         fullName: "Ezoza Zaxidova",
         region: "TASHKENT",
         role: "FRONTEND",
@@ -432,8 +476,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "islombek_41@apex.uz",
-        passwordHash,
+        email: "islombek31",
+        passwordHash: volPasswords[30],
         fullName: "Islombek Abdumutalibov",
         region: "ANDIJAN",
         role: "DESIGNER",
@@ -445,8 +489,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "hasanxon_42@apex.uz",
-        passwordHash,
+        email: "hasanxon32",
+        passwordHash: volPasswords[31],
         fullName: "Hasanxon Savriddinov",
         region: "SAMARKAND",
         role: "CYBERSECURITY",
@@ -458,8 +502,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "full_47@apex.uz",
-        passwordHash,
+        email: "full33",
+        passwordHash: volPasswords[32],
         fullName: "Full  Abadov Faridun",
         region: "KHOREZM",
         role: "PM",
@@ -471,8 +515,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "shohruh_48@apex.uz",
-        passwordHash,
+        email: "shohruh34",
+        passwordHash: volPasswords[33],
         fullName: "Shohruh O'sarov",
         region: "NAVOIY",
         role: "AI_ML",
@@ -484,8 +528,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "akmalnorkulovv_49@apex.uz",
-        passwordHash,
+        email: "akmalnorkulovv35",
+        passwordHash: volPasswords[34],
         fullName: "akmal_norkulovv",
         region: "KASHKADARYA",
         role: "FRONTEND",
@@ -497,8 +541,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "umarov_50@apex.uz",
-        passwordHash,
+        email: "umarov36",
+        passwordHash: volPasswords[35],
         fullName: "Umarov Abdulloh",
         region: "TASHKENT",
         role: "BACKEND",
@@ -510,8 +554,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "rahim_51@apex.uz",
-        passwordHash,
+        email: "rahim37",
+        passwordHash: volPasswords[36],
         fullName: "Rahim Rakhimov",
         region: "ANDIJAN",
         role: "AI_ML",
@@ -523,8 +567,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "goyibnazarov_52@apex.uz",
-        passwordHash,
+        email: "goyibnazarov38",
+        passwordHash: volPasswords[37],
         fullName: "G'oyibnazarov Sohibjon",
         region: "SAMARKAND",
         role: "FRONTEND",
@@ -536,8 +580,8 @@ async function main() {
     }),
     prisma.user.create({
       data: {
-        email: "husniyor_54@apex.uz",
-        passwordHash,
+        email: "husniyor39",
+        passwordHash: volPasswords[38],
         fullName: "Husniyor Azimboyev",
         region: "FERGANA",
         role: "BACKEND",
@@ -655,12 +699,14 @@ async function main() {
 
 
 
+
   console.log('🎉 Seeding complete!')
   console.log('')
-  console.log('Demo accounts (all passwords: password123):')
-  console.log('  📧 admin@apex.uz    (ADMIN, 1000 XP)')
-  console.log('  📧 founder@apex.uz  (ADMIN, 1000 XP)')
-
+  console.log('Admin accounts (password: password123):')
+  console.log('  📧 admin@apex.uz    (ADMIN)')
+  console.log('  📧 founder@apex.uz  (ADMIN)')
+  console.log('')
+  console.log('📋 39 volunteers created with unique credentials')
 }
 
 main()

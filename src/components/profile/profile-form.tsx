@@ -55,7 +55,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
     },
   })
 
-  const isTemporaryEmail = user.email.endsWith('@apex.uz') && !['admin@apex.uz', 'founder@apex.uz'].includes(user.email)
+  const isTemporaryEmail = !user.email.includes('@')
 
   const {
     register: registerSecurity,

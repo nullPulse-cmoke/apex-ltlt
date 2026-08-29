@@ -83,7 +83,7 @@ export default async function DashboardPage() {
     { label: 'Leaderboard', href: '/leaderboard', icon: Trophy, desc: 'See where you rank' },
   ]
 
-  const isTemporaryEmail = user.email.endsWith('@apex.uz') && !['admin@apex.uz', 'founder@apex.uz'].includes(user.email)
+  const isTemporaryEmail = !user.email.includes('@')
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 stagger-children">
