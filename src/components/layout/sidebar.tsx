@@ -133,7 +133,7 @@ export function Sidebar({ user, isOpen, setIsOpen }: SidebarProps) {
                   'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200',
                   isActive
                     ? 'bg-[var(--violet)]/15 text-[var(--violet-light)] border border-[var(--violet)]/25'
-                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)]',
+                    : 'border border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)]',
                   collapsed && 'justify-center px-2'
                 )}
                 title={collapsed ? item.label : undefined}
