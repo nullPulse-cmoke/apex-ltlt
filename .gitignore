@@ -45,3 +45,8 @@ next-env.d.ts
 *.db-journal
 *.db-shm
 *.db-wal
+
+# local temp configs and credentials
+/volunteers_messages.txt
+/nginx-default
+
