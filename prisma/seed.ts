@@ -57,6 +57,7 @@ async function main() {
     bcrypt.hash('zlad29', 12),
     bcrypt.hash('niuj88', 12),
     bcrypt.hash('ctug63', 12),
+    bcrypt.hash('kpxm47', 12),
   ])
 
   const users = await Promise.all([
@@ -589,6 +590,19 @@ async function main() {
         totalXp: 50,
         bio: "Back-end developer(Python/Django/Fastapi/Flask) + Some VibeCoding Front-end experience. Experience: Beginner(have bunch of pet-projects and replicas o",
         techStack: JSON.stringify(['Django', 'Python']),
+      }
+    }),
+    prisma.user.create({
+      data: {
+        email: "sarvarbek40",
+        passwordHash: volPasswords[39],
+        fullName: "Tursunaliev Sarvarbek",
+        region: "TASHKENT",
+        role: "CYBERSECURITY",
+        tier: "BRONZE",
+        totalXp: 50,
+        bio: "AI, Frontend, Cyber security. Experience level: Beginner",
+        techStack: JSON.stringify(['Cybersecurity']),
       }
     }),
   ])
