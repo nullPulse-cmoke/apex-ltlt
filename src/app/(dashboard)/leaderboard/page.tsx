@@ -41,11 +41,17 @@ export default async function LeaderboardPage() {
     take: 50,
   })
 
-  const rankedUsers = users.map((u, i) => ({
-    ...u,
-    rank: i + 1,
-    deployedTasks: u._count.xpLedger,
-  }))
+  let currentRank = 1
+  const rankedUsers = users.map((u, i) => {
+    if (i > 0 && u.totalXp < users[i - 1].totalXp) {
+      currentRank = i + 1
+    }
+    return {
+      ...u,
+      rank: currentRank,
+      deployedTasks: u._count.xpLedger,
+    }
+  })
 
   return (
     <div className="max-w-5xl mx-auto space-y-6">
