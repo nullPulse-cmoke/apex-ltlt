@@ -83,8 +83,25 @@ export default async function DashboardPage() {
     { label: 'Leaderboard', href: '/leaderboard', icon: Trophy, desc: 'See where you rank' },
   ]
 
+  const isTemporaryEmail = user.email.endsWith('@apex.uz') && !['admin@apex.uz', 'founder@apex.uz'].includes(user.email)
+
   return (
     <div className="max-w-6xl mx-auto space-y-6 stagger-children">
+      {isTemporaryEmail && (
+        <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 text-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md animate-slide-up">
+          <div className="flex flex-col gap-1">
+            <span className="font-bold text-amber-300">⚠️ Важное действие: Настройте свой Email и Пароль</span>
+            <span>Ваш аккаунт использует временный e-mail. Пожалуйста, обновите его на ваш личный e-mail.</span>
+          </div>
+          <Link
+            href="/profile"
+            className="shrink-0 px-4 py-2 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-semibold transition-colors text-center"
+          >
+            Настроить Профиль
+          </Link>
+        </div>
+      )}
+
       {/* Welcome Banner */}
       <div className="relative overflow-hidden rounded-2xl p-6 gradient-border">
         <div className="absolute inset-0 bg-gradient-to-r from-[var(--violet)]/10 to-[var(--cyan)]/5" />

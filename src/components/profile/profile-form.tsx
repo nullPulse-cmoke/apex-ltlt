@@ -43,6 +43,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
   const { register, handleSubmit } = useForm({
     defaultValues: {
       fullName: user.fullName,
+      email: user.email,
       telegramHandle: user.telegramHandle || '',
       region: user.region,
       role: user.role,
@@ -53,6 +54,8 @@ export function ProfileForm({ user }: ProfileFormProps) {
       portfolioUrl: user.portfolioUrl || '',
     },
   })
+
+  const isTemporaryEmail = user.email.endsWith('@apex.uz') && !['admin@apex.uz', 'founder@apex.uz'].includes(user.email)
 
   const {
     register: registerSecurity,
@@ -182,6 +185,18 @@ export function ProfileForm({ user }: ProfileFormProps) {
         </button>
       </div>
 
+      {/* Temporary Email Notice */}
+      {isTemporaryEmail && (
+        <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 text-sm flex flex-col gap-2 shadow-sm animate-slide-up">
+          <span className="font-bold text-amber-300">⚠️ Действие требуется: Настройка нового аккаунта</span>
+          <p>
+            Вы вошли под временным адресом электронной почты <strong>{user.email}</strong>. 
+            Пожалуйста, укажите ваш <strong>реальный рабочий email</strong> в поле ниже и сохраните профиль. 
+            Также рекомендуем перейти во вкладку <strong>Security</strong> и установить свой личный надежный пароль.
+          </p>
+        </div>
+      )}
+
       {/* Messages */}
       {message && (
         <div className="p-3 rounded-lg bg-[var(--green)]/10 border border-[var(--green)]/20 text-[var(--green)] text-sm">
@@ -199,8 +214,15 @@ export function ProfileForm({ user }: ProfileFormProps) {
         <Card>
           <CardContent>
             <form onSubmit={handleSubmit(onSaveProfile)} className="space-y-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <Input id="profile-name" label="Full Name" disabled {...register('fullName')} />
+                <Input
+                  id="profile-email"
+                  label="Email Address (Required)"
+                  required
+                  type="email"
+                  {...register('email')}
+                />
                 <Input
                   id="profile-telegram"
                   label="Telegram Handle"

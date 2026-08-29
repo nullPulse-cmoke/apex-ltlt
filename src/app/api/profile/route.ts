@@ -44,6 +44,21 @@ export async function PATCH(request: Request) {
       }
     }
 
+    if (body.email) {
+      const email = body.email.trim().toLowerCase()
+      if (!email.includes('@') || !email.includes('.')) {
+        return NextResponse.json({ error: 'Invalid email address' }, { status: 400 })
+      }
+      // Check if email is taken
+      const existingUser = await prisma.user.findUnique({
+        where: { email }
+      })
+      if (existingUser && existingUser.id !== session.user.id) {
+        return NextResponse.json({ error: 'Email address is already in use' }, { status: 400 })
+      }
+      updateData.email = email
+    }
+
     const user = await prisma.user.update({
       where: { id: session.user.id },
       data: updateData,
