@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  passwordHash  String
+  fullName      String
+  telegramHandle String?
+  region        String   @default("TASHKENT")
+  role          String   @default("FRONTEND")
+  tier          String   @default("BRONZE")
+  totalXp       Int      @default(0)
+  avatarUrl     String?
+  bio           String?
+  techStack     String   @default("[]")
+  githubUrl     String?
+  linkedinUrl   String?
+  portfolioUrl  String?
+  lastLoginAt   DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  applications  Application[]
+  xpLedger      XpLedger[]
+  notifications Notification[]
+}
+
+model Notification {
+  id          String   @id @default(cuid())
+  userId      String
+  title       String
+  message     String
+  read        Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Program {
+  id           String   @id @default(cuid())
+  title        String
+  slug         String   @unique
+  description  String
+  clientType   String
+  techStack    String   @default("[]")
+  weeklyHours  Int      @default(10)
+  status       String   @default("RECRUITING")
+  maxTeamSize  Int      @default(5)
+  imageUrl     String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  applications Application[]
+}
+
+model Application {
+  id                String   @id @default(cuid())
+  userId            String
+  programId         String
+  status            String   @default("PENDING")
+  coverLetter       String?
+  feedback          String?
+  telegramGroupLink String?
+  appliedAt         DateTime @default(now())
+  reviewedAt        DateTime?
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  program Program @relation(fields: [programId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, programId])
+}
+
+model XpLedger {
+  id        String   @id @default(cuid())
+  userId    String
+  amount    Int
+  reason    String
+  category  String
+  programId String?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
