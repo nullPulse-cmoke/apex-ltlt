@@ -39,8 +39,11 @@ export function LeaderboardClient({ rankedUsers, currentUserId }: LeaderboardCli
   const [selectedUser, setSelectedUser] = useState<LeaderboardUser | null>(null)
   const [copySuccess, setCopySuccess] = useState(false)
 
-  const top3 = rankedUsers.slice(0, 3)
-  const rest = rankedUsers.slice(3)
+  // If all users have the same XP, we do not show a podium (so everyone is displayed equally in the table).
+  const allEqual = rankedUsers.length > 0 && rankedUsers.every(u => u.totalXp === rankedUsers[0].totalXp)
+
+  const top3 = allEqual ? [] : rankedUsers.slice(0, 3)
+  const rest = allEqual ? rankedUsers : rankedUsers.slice(3)
 
   const podiumColors = [
     { bg: 'from-yellow-500/20 to-yellow-600/5', border: 'border-yellow-500/30', glow: '0 0 30px rgba(255,215,0,0.2)', label: '🥇' },
@@ -62,6 +65,15 @@ export function LeaderboardClient({ rankedUsers, currentUserId }: LeaderboardCli
     <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
       {/* Main Content */}
       <div className="lg:col-span-3 space-y-6">
+        {allEqual && (
+          <div className="p-4 rounded-xl bg-[var(--violet)]/10 border border-[var(--violet)]/20 text-[var(--violet-light)] text-sm flex items-center gap-3">
+            <Trophy className="h-5 w-5 text-[var(--yellow)] shrink-0 animate-bounce" />
+            <div>
+              <span className="font-bold">Все волонтеры равны!</span> На старте сезона все участники имеют равное количество очков и разделяют между собой <strong className="text-[var(--yellow)]">1-е место</strong> в рейтинге.
+            </div>
+          </div>
+        )}
+
         {/* Top 3 Podium */}
         {top3.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
