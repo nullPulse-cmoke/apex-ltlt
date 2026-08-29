@@ -188,11 +188,11 @@ export function ProfileForm({ user }: ProfileFormProps) {
       {/* Temporary Email Notice */}
       {isTemporaryEmail && (
         <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 text-sm flex flex-col gap-2 shadow-sm animate-slide-up">
-          <span className="font-bold text-amber-300">⚠️ Действие требуется: Настройка нового аккаунта</span>
+          <span className="font-bold text-amber-300">⚠️ Action Required: Setup Your New Account</span>
           <p>
-            Вы вошли под временным адресом электронной почты <strong>{user.email}</strong>. 
-            Пожалуйста, укажите ваш <strong>реальный рабочий email</strong> и имя пользователя <strong>Telegram</strong> (например, @username) в полях ниже и сохраните профиль. 
-            Также рекомендуем перейти во вкладку <strong>Security</strong> и установить свой личный надежный пароль.
+            You have logged in using a temporary email address: <strong>{user.email}</strong>. 
+            Please provide your <strong>real email address</strong> and your <strong>Telegram handle</strong> (e.g., @username) in the fields below, and save your profile. 
+            We also highly recommend going to the <strong>Security</strong> tab to change your password.
           </p>
         </div>
       )}

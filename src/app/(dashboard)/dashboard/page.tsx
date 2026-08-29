@@ -90,14 +90,14 @@ export default async function DashboardPage() {
       {isTemporaryEmail && (
         <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 text-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md animate-slide-up">
           <div className="flex flex-col gap-1">
-            <span className="font-bold text-amber-300">⚠️ Важное действие: Настройте свой Email, Telegram и Пароль</span>
-            <span>Ваш аккаунт использует временный e-mail. Пожалуйста, укажите ваш личный e-mail и имя пользователя Telegram в профиле.</span>
+            <span className="font-bold text-amber-300">⚠️ Action Required: Setup Your Profile</span>
+            <span>Your account is using a temporary email. Please update your personal email and Telegram username in your profile.</span>
           </div>
           <Link
             href="/profile"
             className="shrink-0 px-4 py-2 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-semibold transition-colors text-center"
           >
-            Настроить Профиль
+            Setup Profile
           </Link>
         </div>
       )}

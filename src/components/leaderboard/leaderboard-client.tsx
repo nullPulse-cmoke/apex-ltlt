@@ -69,7 +69,7 @@ export function LeaderboardClient({ rankedUsers, currentUserId }: LeaderboardCli
           <div className="p-4 rounded-xl bg-[var(--violet)]/10 border border-[var(--violet)]/20 text-[var(--violet-light)] text-sm flex items-center gap-3">
             <Trophy className="h-5 w-5 text-[var(--yellow)] shrink-0 animate-bounce" />
             <div>
-              <span className="font-bold">Все волонтеры равны!</span> На старте сезона все участники имеют равное количество очков и разделяют между собой <strong className="text-[var(--yellow)]">1-е место</strong> в рейтинге.
+              <span className="font-bold">All volunteers are tied!</span> At the start of the season, all participants have an equal amount of XP and share the <strong className="text-[var(--yellow)]">1st place</strong> on the leaderboard.
             </div>
           </div>
         )}
