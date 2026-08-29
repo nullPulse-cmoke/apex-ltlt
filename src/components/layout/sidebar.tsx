@@ -78,7 +78,11 @@ export function Sidebar({ user, isOpen, setIsOpen }: SidebarProps) {
         {/* Logo */}
         <div className="flex items-center justify-between px-4 h-16 border-b border-[var(--border-subtle)]">
           {!collapsed && (
-            <Link href="/dashboard" className="flex items-center gap-2">
+            <Link
+              href="/dashboard"
+              className="flex items-center gap-2"
+              onClick={() => setIsOpen?.(false)}
+            >
               <img src="/logo.png" alt="APEX Logo" className="h-7 w-auto object-contain" />
               <span className="font-bold text-lg gradient-text">APEX</span>
             </Link>
@@ -124,6 +128,7 @@ export function Sidebar({ user, isOpen, setIsOpen }: SidebarProps) {
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={() => setIsOpen?.(false)}
                 className={cn(
                   'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200',
                   isActive
