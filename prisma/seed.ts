@@ -271,13 +271,13 @@ async function main() {
       data: {
         email: "behruz15",
         passwordHash: volPasswords[14],
-        fullName: "Behruz O'ktamboyev",
+        fullName: "Bekhruz Tadjiev",
         region: "KHOREZM",
-        role: "PM",
+        role: "AI_ML",
         tier: "BRONZE",
         totalXp: 50,
-        bio: "Frontend( also vibe-coder ) /Video Editor/Content Creator(in youtube, podcasts), Project manager Beginner/Intermediate(over year of experience) /Inter",
-        techStack: JSON.stringify([]),
+        bio: "AI/ML Engineer, Data Analyst. Experience level: Intermediate.",
+        techStack: JSON.stringify(['AI_ML', 'Data Analysis']),
       }
     }),
     prisma.user.create({
