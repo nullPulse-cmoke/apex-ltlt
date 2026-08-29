@@ -90,8 +90,8 @@ export default async function DashboardPage() {
       {isTemporaryEmail && (
         <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400 text-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md animate-slide-up">
           <div className="flex flex-col gap-1">
-            <span className="font-bold text-amber-300">⚠️ Важное действие: Настройте свой Email и Пароль</span>
-            <span>Ваш аккаунт использует временный e-mail. Пожалуйста, обновите его на ваш личный e-mail.</span>
+            <span className="font-bold text-amber-300">⚠️ Важное действие: Настройте свой Email, Telegram и Пароль</span>
+            <span>Ваш аккаунт использует временный e-mail. Пожалуйста, укажите ваш личный e-mail и имя пользователя Telegram в профиле.</span>
           </div>
           <Link
             href="/profile"

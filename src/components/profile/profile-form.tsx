@@ -191,7 +191,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
           <span className="font-bold text-amber-300">⚠️ Действие требуется: Настройка нового аккаунта</span>
           <p>
             Вы вошли под временным адресом электронной почты <strong>{user.email}</strong>. 
-            Пожалуйста, укажите ваш <strong>реальный рабочий email</strong> в поле ниже и сохраните профиль. 
+            Пожалуйста, укажите ваш <strong>реальный рабочий email</strong> и имя пользователя <strong>Telegram</strong> (например, @username) в полях ниже и сохраните профиль. 
             Также рекомендуем перейти во вкладку <strong>Security</strong> и установить свой личный надежный пароль.
           </p>
         </div>
@@ -225,9 +225,10 @@ export function ProfileForm({ user }: ProfileFormProps) {
                 />
                 <Input
                   id="profile-telegram"
-                  label="Telegram Handle"
+                  label="Telegram Handle (Required)"
+                  required
                   icon={<AtSign className="h-4 w-4" />}
-                  {...register('telegramHandle')}
+                  {...register('telegramHandle', { required: true })}
                 />
               </div>
 

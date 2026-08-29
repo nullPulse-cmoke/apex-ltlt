@@ -33,7 +33,7 @@ export async function PATCH(request: Request) {
 
     const body = await request.json()
     const allowedFields = [
-      'telegramHandle', 'region', 'role',
+      'region', 'role',
       'bio', 'techStack', 'githubUrl', 'linkedinUrl', 'portfolioUrl',
     ]
 
@@ -57,6 +57,17 @@ export async function PATCH(request: Request) {
         return NextResponse.json({ error: 'Email address is already in use' }, { status: 400 })
       }
       updateData.email = email
+    }
+
+    if ('telegramHandle' in body) {
+      let handle = body.telegramHandle.trim()
+      if (!handle) {
+        return NextResponse.json({ error: 'Telegram handle is required' }, { status: 400 })
+      }
+      if (!handle.startsWith('@')) {
+        handle = `@${handle}`
+      }
+      updateData.telegramHandle = handle
     }
 
     const user = await prisma.user.update({
