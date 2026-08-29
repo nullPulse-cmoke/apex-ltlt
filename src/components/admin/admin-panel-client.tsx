@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import {
@@ -131,6 +132,12 @@ export function AdminPanelClient({
   const [appActionType, setAppActionType] = useState<'ACCEPT' | 'DECLINE' | null>(null)
   const [selectedProgramIds, setSelectedProgramIds] = useState<string[]>([])
   const [selectedVolunteerIds, setSelectedVolunteerIds] = useState<string[]>([])
+  const [broadcastModalOpen, setBroadcastModalOpen] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     setSelectedProgramIds([])
@@ -456,6 +463,34 @@ export function AdminPanelClient({
     setLoading(false)
   }
 
+  const onSendBroadcastNotification = async (data: any) => {
+    setLoading(true)
+    setError('')
+    setMessage('')
+    try {
+      const res = await fetch('/api/admin/notifications', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userId: 'ALL',
+          title: data.title,
+          message: data.message,
+        }),
+      })
+      if (!res.ok) {
+        const body = await res.json()
+        setError(body.error || 'Failed to send broadcast notification')
+      } else {
+        setMessage('Broadcast notification sent successfully to all volunteers')
+        resetNotify()
+        setBroadcastModalOpen(false)
+      }
+    } catch {
+      setError('Something went wrong')
+    }
+    setLoading(false)
+  }
+
   const onManageVolunteer = async (data: any) => {
     if (!selectedVolunteer) return
     setLoading(true)
@@ -669,6 +704,18 @@ export function AdminPanelClient({
                 Delete Selected ({selectedVolunteerIds.length})
               </Button>
             )}
+            <Button
+              onClick={() => {
+                setError('')
+                resetNotify({ title: 'Announcement', message: '' })
+                setBroadcastModalOpen(true)
+              }}
+              variant="secondary"
+              className="w-fit"
+            >
+              <Bell className="h-4 w-4" />
+              Broadcast Alert
+            </Button>
             <Button onClick={() => setUserModalOpen(true)} className="w-fit">
               <Plus className="h-4 w-4" />
               Add Volunteer Account
@@ -1269,6 +1316,37 @@ export function AdminPanelClient({
             </form>
           </div>
         </div>
+      )}
+
+      {/* Modal: Send Broadcast Notification */}
+      {mounted && broadcastModalOpen && createPortal(
+        <div className="fixed inset-0 z-55 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setBroadcastModalOpen(false)} />
+          <div className="relative z-10 w-full max-w-lg mx-4 glass-strong rounded-2xl p-6 shadow-2xl animate-slide-up">
+            <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+              <Bell className="h-5 w-5 text-[var(--violet-light)]" />
+              Broadcast Alert to All Volunteers
+            </h3>
+            {error && (
+              <div className="mb-4 p-3 rounded-lg bg-[var(--red)]/10 border border-[var(--red)]/20 text-[var(--red)] text-sm">
+                {error}
+              </div>
+            )}
+            <form onSubmit={handleNotifySubmit(onSendBroadcastNotification)} className="space-y-4">
+              <Input id="broad-title" label="Alert Title" {...regNotify('title')} />
+              <Textarea id="broad-msg" label="Alert Message" placeholder="Enter message here..." className="min-h-[100px]" {...regNotify('message')} />
+              <div className="flex gap-3 justify-end pt-2">
+                <Button type="button" variant="ghost" onClick={() => setBroadcastModalOpen(false)}>
+                  Cancel
+                </Button>
+                <Button type="submit" loading={loading}>
+                  Send Alert to All
+                </Button>
+              </div>
+            </form>
+          </div>
+        </div>,
+        document.body
       )}
 
       {/* Modal: Manage Volunteer Account */}
