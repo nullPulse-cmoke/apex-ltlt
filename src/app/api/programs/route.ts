@@ -9,8 +9,8 @@ const createProgramSchema = z.object({
   description: z.string().min(10, 'Description must be at least 10 characters'),
   clientType: z.string().min(1, 'Client type is required'),
   techStack: z.string().min(1, 'Tech stack is required'),
-  weeklyHours: z.number().min(1, 'Weekly hours must be at least 1'),
-  maxTeamSize: z.number().min(1, 'Max team size must be at least 1'),
+  weeklyHours: z.coerce.number().min(1, 'Weekly hours must be at least 1'),
+  maxTeamSize: z.coerce.number().min(1, 'Max team size must be at least 1'),
 })
 
 function slugify(text: string) {
@@ -101,6 +101,7 @@ export async function POST(request: Request) {
     return NextResponse.json(program, { status: 201 })
   } catch (error) {
     if (error instanceof Error && error.name === 'ZodError') {
+      console.error('[API Programs POST ZodError]', error)
       return NextResponse.json(
         { error: 'Validation failed', details: error },
         { status: 400 }

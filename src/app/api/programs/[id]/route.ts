@@ -8,8 +8,8 @@ const updateProgramSchema = z.object({
   description: z.string().min(10).optional(),
   clientType: z.string().min(1).optional(),
   techStack: z.string().min(1).optional(),
-  weeklyHours: z.number().min(1).optional(),
-  maxTeamSize: z.number().min(1).optional(),
+  weeklyHours: z.coerce.number().min(1).optional(),
+  maxTeamSize: z.coerce.number().min(1).optional(),
   status: z.enum(['RECRUITING', 'IN_PROGRESS', 'COMPLETED']).optional(),
 })
 

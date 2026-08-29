@@ -21,6 +21,24 @@ export async function POST(request: Request) {
     const body = await request.json()
     const validated = sendNotificationSchema.parse(body)
 
+    if (validated.userId === 'ALL') {
+      const volunteers = await prisma.user.findMany({
+        where: { role: { not: 'ADMIN' } },
+        select: { id: true },
+      })
+
+      await prisma.notification.createMany({
+        data: volunteers.map((u) => ({
+          userId: u.id,
+          title: validated.title,
+          message: validated.message,
+          read: false,
+        })),
+      })
+
+      return NextResponse.json({ success: true, count: volunteers.length }, { status: 201 })
+    }
+
     const notification = await prisma.notification.create({
       data: {
         userId: validated.userId,
