@@ -134,6 +134,7 @@ export function AdminPanelClient({
   const [selectedVolunteerIds, setSelectedVolunteerIds] = useState<string[]>([])
   const [broadcastModalOpen, setBroadcastModalOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
     setMounted(true)
@@ -759,115 +760,148 @@ export function AdminPanelClient({
       )}
 
       {/* Tab: Volunteers */}
-      {activeTab === 'volunteers' && (
-        <Card>
-          <CardContent className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-[var(--border-subtle)] text-xs text-[var(--text-muted)] uppercase">
-                  <th className="py-3 px-4 w-10">
-                    <CustomCheckbox
-                      checked={selectedVolunteerIds.length === initialVolunteers.length && initialVolunteers.length > 0}
-                      onChange={(checked) => {
-                        if (checked) {
-                          setSelectedVolunteerIds(initialVolunteers.map((v) => v.id))
-                        } else {
-                          setSelectedVolunteerIds([])
-                        }
-                      }}
-                    />
-                  </th>
-                  <th className="py-3 px-4">Volunteer</th>
-                  <th className="py-3 px-4">Role</th>
-                  <th className="py-3 px-4">Region</th>
-                  <th className="py-3 px-4">Tier</th>
-                  <th className="py-3 px-4 text-right">XP</th>
-                  <th className="py-3 px-4 text-right">Last Active</th>
-                  <th className="py-3 px-4 text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[var(--border-subtle)] text-sm">
-                {initialVolunteers.map((vol) => {
-                  const tierInfo = getTierInfo(vol.tier)
-                  const isSelected = selectedVolunteerIds.includes(vol.id)
-                  return (
-                    <tr key={vol.id} className={`hover:bg-[var(--bg-surface)]/50 ${isSelected ? 'bg-[var(--violet)]/5' : ''}`}>
-                      <td className="py-3.5 px-4">
-                        <CustomCheckbox
-                          checked={isSelected}
-                          onChange={(checked) => {
-                            if (checked) {
-                              setSelectedVolunteerIds((prev) => [...prev, vol.id])
-                            } else {
-                              setSelectedVolunteerIds((prev) => prev.filter((id) => id !== vol.id))
-                            }
-                          }}
-                        />
-                      </td>
-                      <td className="py-3.5 px-4">
-                        <p className="font-semibold">{vol.fullName}</p>
-                        <p className="text-xs text-[var(--text-secondary)]">{vol.email}</p>
-                      </td>
-                      <td className="py-3.5 px-4">
-                        <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold ${getRoleInfo(vol.role).className}`}>
-                          <span>{getRoleInfo(vol.role).icon}</span>
-                          <span>{getRoleInfo(vol.role).label}</span>
-                        </span>
-                      </td>
-                      <td className="py-3.5 px-4 text-[var(--text-secondary)]">{vol.region}</td>
-                      <td className="py-3.5 px-4">
-                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${tierInfo.className}`}>
-                          {tierInfo.label}
-                        </span>
-                      </td>
-                      <td className="py-3.5 px-4 text-right font-mono font-semibold text-[var(--violet-light)]">
-                        {formatXp(vol.totalXp)}
-                      </td>
-                      <td className="py-3.5 px-4 text-right text-xs text-[var(--text-secondary)] font-mono">
-                        {vol.lastLoginAt ? timeAgo(vol.lastLoginAt) : 'Never'}
-                      </td>
-                      <td className="py-3.5 px-4 text-right">
-                        <div className="flex gap-2 justify-end">
-                          <Button
-                            size="sm"
-                            variant="secondary"
-                            onClick={() => {
-                              setSelectedVolunteer(vol)
-                              setXpModalOpen(true)
-                            }}
-                          >
-                            <Zap className="h-3 w-3" />
-                            Allocate XP
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="secondary"
-                            onClick={() => {
-                              setSelectedVolunteer(vol)
-                              setNotifyModalOpen(true)
-                            }}
-                          >
-                            <Bell className="h-3 w-3" />
-                            Notify
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="secondary"
-                            onClick={() => openManageModal(vol)}
-                          >
-                            <Settings className="h-3 w-3" />
-                            Manage
-                          </Button>
-                        </div>
+      {activeTab === 'volunteers' && (() => {
+        const filteredVolunteers = initialVolunteers.filter((vol) =>
+          vol.fullName.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        return (
+          <Card>
+            {/* Search Input and status */}
+            <div className="px-6 pt-5 pb-2 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-[var(--border-subtle)]/50">
+              <div className="w-full max-w-sm">
+                <Input
+                  id="search-volunteer"
+                  placeholder="Search volunteers by name..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full"
+                />
+              </div>
+              <div className="text-xs text-[var(--text-muted)] font-medium">
+                {searchQuery ? (
+                  <span>Found {filteredVolunteers.length} of {initialVolunteers.length} volunteers</span>
+                ) : (
+                  <span>Total: {initialVolunteers.length} volunteers</span>
+                )}
+              </div>
+            </div>
+
+            <CardContent className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="border-b border-[var(--border-subtle)] text-xs text-[var(--text-muted)] uppercase">
+                    <th className="py-3 px-4 w-10">
+                      <CustomCheckbox
+                        checked={selectedVolunteerIds.length === filteredVolunteers.length && filteredVolunteers.length > 0}
+                        onChange={(checked) => {
+                          if (checked) {
+                            setSelectedVolunteerIds(filteredVolunteers.map((v) => v.id))
+                          } else {
+                            setSelectedVolunteerIds([])
+                          }
+                        }}
+                      />
+                    </th>
+                    <th className="py-3 px-4">Volunteer</th>
+                    <th className="py-3 px-4">Role</th>
+                    <th className="py-3 px-4">Region</th>
+                    <th className="py-3 px-4">Tier</th>
+                    <th className="py-3 px-4 text-right">XP</th>
+                    <th className="py-3 px-4 text-right">Last Active</th>
+                    <th className="py-3 px-4 text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-[var(--border-subtle)] text-sm">
+                  {filteredVolunteers.length === 0 ? (
+                    <tr>
+                      <td colSpan={8} className="py-12 text-center text-[var(--text-secondary)]">
+                        No volunteers found matching &quot;{searchQuery}&quot;
                       </td>
                     </tr>
-                  )
-                })}
-              </tbody>
-            </table>
-          </CardContent>
-        </Card>
-      )}
+                  ) : (
+                    filteredVolunteers.map((vol) => {
+                      const tierInfo = getTierInfo(vol.tier)
+                      const isSelected = selectedVolunteerIds.includes(vol.id)
+                      return (
+                        <tr key={vol.id} className={`hover:bg-[var(--bg-surface)]/50 ${isSelected ? 'bg-[var(--violet)]/5' : ''}`}>
+                          <td className="py-3.5 px-4">
+                            <CustomCheckbox
+                              checked={isSelected}
+                              onChange={(checked) => {
+                                if (checked) {
+                                  setSelectedVolunteerIds((prev) => [...prev, vol.id])
+                                } else {
+                                  setSelectedVolunteerIds((prev) => prev.filter((id) => id !== vol.id))
+                                }
+                              }}
+                            />
+                          </td>
+                          <td className="py-3.5 px-4">
+                            <p className="font-semibold">{vol.fullName}</p>
+                            <p className="text-xs text-[var(--text-secondary)]">{vol.email}</p>
+                          </td>
+                          <td className="py-3.5 px-4">
+                            <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold ${getRoleInfo(vol.role).className}`}>
+                              <span>{getRoleInfo(vol.role).icon}</span>
+                              <span>{getRoleInfo(vol.role).label}</span>
+                            </span>
+                          </td>
+                          <td className="py-3.5 px-4 text-[var(--text-secondary)]">{vol.region}</td>
+                          <td className="py-3.5 px-4">
+                            <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${tierInfo.className}`}>
+                              {tierInfo.label}
+                            </span>
+                          </td>
+                          <td className="py-3.5 px-4 text-right font-mono font-semibold text-[var(--violet-light)]">
+                            {formatXp(vol.totalXp)}
+                          </td>
+                          <td className="py-3.5 px-4 text-right text-xs text-[var(--text-secondary)] font-mono">
+                            {vol.lastLoginAt ? timeAgo(vol.lastLoginAt) : 'Never'}
+                          </td>
+                          <td className="py-3.5 px-4 text-right">
+                            <div className="flex gap-2 justify-end">
+                              <Button
+                                size="sm"
+                                variant="secondary"
+                                onClick={() => {
+                                  setSelectedVolunteer(vol)
+                                  setXpModalOpen(true)
+                                }}
+                              >
+                                <Zap className="h-3 w-3" />
+                                Allocate XP
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="secondary"
+                                onClick={() => {
+                                  setSelectedVolunteer(vol)
+                                  setNotifyModalOpen(true)
+                                }}
+                              >
+                                <Bell className="h-3 w-3" />
+                                Notify
+                              </Button>
+                              <Button
+                                size="sm"
+                                variant="secondary"
+                                onClick={() => openManageModal(vol)}
+                              >
+                                <Settings className="h-3 w-3" />
+                                Manage
+                              </Button>
+                            </div>
+                          </td>
+                        </tr>
+                      )
+                    })
+                  )}
+                </tbody>
+              </table>
+            </CardContent>
+          </Card>
+        )
+      })()}
 
       {/* Tab: Applications */}
       {activeTab === 'applications' && (
