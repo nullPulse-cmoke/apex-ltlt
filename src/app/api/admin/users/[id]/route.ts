@@ -6,7 +6,7 @@ import { z } from 'zod'
 
 const updateVolunteerSchema = z.object({
   fullName: z.string().min(3).optional(),
-  email: z.string().email().optional(),
+  email: z.string().min(3).optional(),
   telegramHandle: z.string().nullable().optional(),
   region: z.string().optional(),
   role: z.string().optional(),
