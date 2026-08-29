@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
@@ -17,8 +18,15 @@ export function ApplyModal({ programId, programTitle, isOpen, onClose }: ApplyMo
   const [coverLetter, setCoverLetter] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+    return () => setMounted(false)
+  }, [])
 
   if (!isOpen) return null
+  if (!mounted) return null
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -47,8 +55,8 @@ export function ApplyModal({ programId, programTitle, isOpen, onClose }: ApplyMo
     }
   }
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+  return createPortal(
+    <div className="fixed inset-0 z-55 flex items-center justify-center">
       {/* Backdrop */}
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onClose} />
 
@@ -83,6 +91,7 @@ export function ApplyModal({ programId, programTitle, isOpen, onClose }: ApplyMo
           </div>
         </form>
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
