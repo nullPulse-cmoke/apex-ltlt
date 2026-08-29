@@ -23,6 +23,10 @@ export const ROLES = [
   { value: 'DEVOPS', label: 'DevOps / Cloud Engineer' },
   { value: 'PM', label: 'Project Manager' },
   { value: 'QA', label: 'QA / Tester' },
+  { value: 'AI_ML', label: 'AI/ML Engineer' },
+  { value: 'DATA_ANALYST', label: 'Data Analyst' },
+  { value: 'CYBERSECURITY', label: 'Cybersecurity Specialist' },
+  { value: 'MARKETING', label: 'Marketing Specialist' },
 ] as const
 
 export const XP_RULES = [

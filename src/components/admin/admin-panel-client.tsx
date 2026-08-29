@@ -25,7 +25,7 @@ import { Input } from '@/components/ui/input'
 import { Select } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
 import { Badge } from '@/components/ui/badge'
-import { formatXp, getTierInfo, getStatusInfo, timeAgo } from '@/lib/utils'
+import { formatXp, getTierInfo, getStatusInfo, timeAgo, getRoleInfo } from '@/lib/utils'
 import { REGIONS, ROLES, XP_RULES } from '@/lib/constants'
 
 interface Volunteer {
@@ -750,7 +750,12 @@ export function AdminPanelClient({
                         <p className="font-semibold">{vol.fullName}</p>
                         <p className="text-xs text-[var(--text-secondary)]">{vol.email}</p>
                       </td>
-                      <td className="py-3.5 px-4 text-[var(--text-secondary)]">{vol.role}</td>
+                      <td className="py-3.5 px-4">
+                        <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold ${getRoleInfo(vol.role).className}`}>
+                          <span>{getRoleInfo(vol.role).icon}</span>
+                          <span>{getRoleInfo(vol.role).label}</span>
+                        </span>
+                      </td>
                       <td className="py-3.5 px-4 text-[var(--text-secondary)]">{vol.region}</td>
                       <td className="py-3.5 px-4">
                         <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${tierInfo.className}`}>

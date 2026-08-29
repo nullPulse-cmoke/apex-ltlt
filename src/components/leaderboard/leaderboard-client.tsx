@@ -6,7 +6,7 @@ import { Avatar } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
-import { formatXp, getTierInfo, getTierProgress, parseTechStack, timeAgo } from '@/lib/utils'
+import { formatXp, getTierInfo, getTierProgress, parseTechStack, timeAgo, getRoleInfo } from '@/lib/utils'
 import { Trophy, Zap, Globe, X, MapPin, User, MessageSquare } from 'lucide-react'
 import { XP_RULES } from '@/lib/constants'
 
@@ -85,7 +85,12 @@ export function LeaderboardClient({ rankedUsers, currentUserId }: LeaderboardCli
                       className={`mx-auto mb-3 ${idx === 0 ? 'ring-yellow-500/50' : idx === 1 ? 'ring-gray-400/50' : 'ring-amber-700/50'}`}
                     />
                     <p className="font-semibold text-sm">{user.fullName}</p>
-                    <p className="text-xs text-[var(--text-muted)] mb-2">{user.role}</p>
+                    <div className="my-2 flex justify-center">
+                      <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold ${getRoleInfo(user.role).className}`}>
+                        <span>{getRoleInfo(user.role).icon}</span>
+                        <span>{getRoleInfo(user.role).label}</span>
+                      </span>
+                    </div>
                     <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-medium ${tierInfo.className}`}>
                       {tierInfo.label}
                     </span>
@@ -143,8 +148,11 @@ export function LeaderboardClient({ rankedUsers, currentUserId }: LeaderboardCli
                           </span>
                         </div>
                       </div>
-                      <div className="col-span-3 text-xs text-[var(--text-secondary)]">
-                        {user.role}
+                      <div className="col-span-3">
+                        <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold ${getRoleInfo(user.role).className}`}>
+                          <span>{getRoleInfo(user.role).icon}</span>
+                          <span>{getRoleInfo(user.role).label}</span>
+                        </span>
                       </div>
                       <div className="col-span-1 text-right text-sm font-mono text-[var(--text-secondary)]">
                         {user.deployedTasks}
@@ -230,7 +238,12 @@ export function LeaderboardClient({ rankedUsers, currentUserId }: LeaderboardCli
                   <span className="text-[10px] bg-[var(--violet)]/20 text-[var(--violet-light)] px-1.5 py-0.5 rounded-full">You</span>
                 )}
               </h3>
-              <p className="text-xs text-[var(--text-secondary)] mt-0.5">{selectedUser.role}</p>
+              <div className="flex justify-center mt-1">
+                <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold ${getRoleInfo(selectedUser.role).className}`}>
+                  <span>{getRoleInfo(selectedUser.role).icon}</span>
+                  <span>{getRoleInfo(selectedUser.role).label}</span>
+                </span>
+              </div>
               
               <div className="flex items-center justify-center gap-4 mt-3 text-[11px] text-[var(--text-muted)]">
                 <span className="flex items-center gap-1">
