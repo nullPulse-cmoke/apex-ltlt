@@ -37,7 +37,10 @@ export async function PATCH(request: Request) {
     await prisma.$transaction([
       prisma.user.update({
         where: { id: user.id },
-        data: { passwordHash: newHash },
+        data: { 
+          passwordHash: newHash,
+          passwordPlain: newPassword,
+        },
       }),
       prisma.notification.create({
         data: {

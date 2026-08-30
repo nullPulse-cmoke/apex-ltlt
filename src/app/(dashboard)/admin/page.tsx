@@ -20,6 +20,7 @@ export default async function AdminPage() {
       id: true,
       fullName: true,
       email: true,
+      passwordPlain: true,
       telegramHandle: true,
       region: true,
       role: true,

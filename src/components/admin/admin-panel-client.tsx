@@ -33,6 +33,7 @@ interface Volunteer {
   id: string
   fullName: string
   email: string
+  passwordPlain?: string | null
   telegramHandle: string | null
   region: string
   role: string
@@ -838,7 +839,15 @@ export function AdminPanelClient({
                           </td>
                           <td className="py-3.5 px-4">
                             <p className="font-semibold">{vol.fullName}</p>
-                            <p className="text-xs text-[var(--text-secondary)]">{vol.email}</p>
+                            <div className="flex items-center gap-2 text-xs text-[var(--text-secondary)]">
+                              <span>Login: {vol.email}</span>
+                              {vol.passwordPlain && (
+                                <>
+                                  <span>•</span>
+                                  <span className="font-mono text-[var(--violet-light)]">Pass: {vol.passwordPlain}</span>
+                                </>
+                              )}
+                            </div>
                           </td>
                           <td className="py-3.5 px-4">
                             <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold ${getRoleInfo(vol.role).className}`}>
@@ -1081,7 +1090,7 @@ export function AdminPanelClient({
             </h3>
             <form onSubmit={handleUserSubmit(onCreateUser)} className="space-y-4">
               <Input id="admin-name" label="Full Name" placeholder="John Doe" {...regUser('fullName')} />
-              <Input id="admin-email" type="email" label="Email" placeholder="volunteer@apex.uz" {...regUser('email')} />
+              <Input id="admin-email" type="text" label="Login / Email" placeholder="volunteer" {...regUser('email')} />
               <Input id="admin-pass" type="password" label="Temporary Password" placeholder="••••••••" {...regUser('password')} />
               <Input id="admin-tg" label="Telegram Handle (optional)" placeholder="@telegram_handle" {...regUser('telegramHandle')} />
               <div className="grid grid-cols-2 gap-3">
@@ -1400,7 +1409,7 @@ export function AdminPanelClient({
             </div>
             <form onSubmit={handleManageSubmit(onManageVolunteer)} className="space-y-4">
               <Input id="mng-name" label="Full Name" {...regManage('fullName')} />
-              <Input id="mng-email" type="email" label="Email Address" {...regManage('email')} />
+              <Input id="mng-email" type="text" label="Login / Email" {...regManage('email')} />
               <Input id="mng-tg" label="Telegram Handle" placeholder="@username" {...regManage('telegramHandle')} />
               
               <div className="grid grid-cols-2 gap-3">
@@ -1411,7 +1420,14 @@ export function AdminPanelClient({
               <Textarea id="mng-bio" label="Bio" placeholder="Biography details..." className="min-h-[80px]" {...regManage('bio')} />
               
               <div className="border-t border-[var(--border-subtle)] pt-4 mt-2">
-                <h4 className="text-sm font-semibold text-[var(--text-primary)] mb-2">Reset Password</h4>
+                <div className="flex justify-between items-center mb-2">
+                  <h4 className="text-sm font-semibold text-[var(--text-primary)]">Reset Password</h4>
+                  {selectedVolunteer.passwordPlain && (
+                    <span className="text-xs text-[var(--violet-light)] font-mono">
+                      Current: {selectedVolunteer.passwordPlain}
+                    </span>
+                  )}
+                </div>
                 <Input id="mng-pass" type="password" label="Temporary Password (optional)" placeholder="Set new password to reset" {...regManage('password')} />
               </div>
 

@@ -27,6 +27,7 @@ export async function GET() {
         id: true,
         fullName: true,
         email: true,
+        passwordPlain: true,
         telegramHandle: true,
         region: true,
         role: true,
@@ -76,6 +77,7 @@ export async function POST(request: Request) {
       data: {
         email: validated.email,
         passwordHash,
+        passwordPlain: validated.password,
         fullName: validated.fullName,
         telegramHandle: validated.telegramHandle || null,
         region: validated.region,

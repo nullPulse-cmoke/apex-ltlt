@@ -17,54 +17,27 @@ async function main() {
   const adminHash = await bcrypt.hash('password123', 12)
 
   // Volunteer passwords
-  const volPasswords = await Promise.all([
-    bcrypt.hash('nvjv23', 12),
-    bcrypt.hash('vghc01', 12),
-    bcrypt.hash('rzge39', 12),
-    bcrypt.hash('lorw33', 12),
-    bcrypt.hash('jtwc25', 12),
-    bcrypt.hash('yjsz80', 12),
-    bcrypt.hash('tuoc02', 12),
-    bcrypt.hash('lfjm50', 12),
-    bcrypt.hash('xagm79', 12),
-    bcrypt.hash('gihe51', 12),
-    bcrypt.hash('reuv67', 12),
-    bcrypt.hash('iayv94', 12),
-    bcrypt.hash('lyhk11', 12),
-    bcrypt.hash('autc47', 12),
-    bcrypt.hash('gwtd77', 12),
-    bcrypt.hash('stfh07', 12),
-    bcrypt.hash('jngl51', 12),
-    bcrypt.hash('xhlx81', 12),
-    bcrypt.hash('jkyn68', 12),
-    bcrypt.hash('hwwy62', 12),
-    bcrypt.hash('jakj66', 12),
-    bcrypt.hash('swlj59', 12),
-    bcrypt.hash('dutr80', 12),
-    bcrypt.hash('ukcf62', 12),
-    bcrypt.hash('uxqg38', 12),
-    bcrypt.hash('gigr22', 12),
-    bcrypt.hash('gzbh24', 12),
-    bcrypt.hash('efbp51', 12),
-    bcrypt.hash('hmbc97', 12),
-    bcrypt.hash('erxq60', 12),
-    bcrypt.hash('tikw28', 12),
-    bcrypt.hash('tvgs12', 12),
-    bcrypt.hash('gaji95', 12),
-    bcrypt.hash('bbfq08', 12),
-    bcrypt.hash('vquz00', 12),
-    bcrypt.hash('cgbl88', 12),
-    bcrypt.hash('zlad29', 12),
-    bcrypt.hash('niuj88', 12),
-    bcrypt.hash('ctug63', 12),
-    bcrypt.hash('kpxm47', 12),
-  ])
+  const volPlainPasswords = [
+    'nvjv23', 'vghc01', 'rzge39', 'lorw33', 'jtwc25',
+    'yjsz80', 'tuoc02', 'lfjm50', 'xagm79', 'gihe51',
+    'reuv67', 'iayv94', 'lyhk11', 'autc47', 'gwtd77',
+    'stfh07', 'jngl51', 'xhlx81', 'jkyn68', 'hwwy62',
+    'jakj66', 'swlj59', 'dutr80', 'ukcf62', 'uxqg38',
+    'gigr22', 'gzbh24', 'efbp51', 'hmbc97', 'erxq60',
+    'tikw28', 'tvgs12', 'gaji95', 'bbfq08', 'vquz00',
+    'cgbl88', 'zlad29', 'niuj88', 'ctug63', 'kpxm47'
+  ];
+
+  const volPasswords = await Promise.all(
+    volPlainPasswords.map(p => bcrypt.hash(p, 12))
+  );
 
   const users = await Promise.all([
     prisma.user.create({
       data: {
         email: 'admin@apex.uz',
         passwordHash: adminHash,
+        passwordPlain: 'password123',
         fullName: 'Admin User',
         role: 'ADMIN',
         tier: 'GOLD_LEAD',
@@ -77,6 +50,7 @@ async function main() {
       data: {
         email: 'founder@apex.uz',
         passwordHash: adminHash,
+        passwordPlain: 'password123',
         fullName: 'Founder / CEO',
         role: 'ADMIN',
         tier: 'GOLD_LEAD',
@@ -89,6 +63,7 @@ async function main() {
       data: {
         email: "shaxzoda1",
         passwordHash: volPasswords[0],
+        passwordPlain: volPlainPasswords[0],
         fullName: "Shaxzoda Yusupova",
         region: "BUKHARA",
         role: "PM",
@@ -102,6 +77,7 @@ async function main() {
       data: {
         email: "ibrohimov2",
         passwordHash: volPasswords[1],
+        passwordPlain: volPlainPasswords[1],
         fullName: "Ibrohimov Farrux",
         region: "FERGANA",
         role: "BACKEND",
@@ -115,6 +91,7 @@ async function main() {
       data: {
         email: "safron3",
         passwordHash: volPasswords[2],
+        passwordPlain: volPlainPasswords[2],
         fullName: "Safron Raxmonkulov",
         region: "NAMANGAN",
         role: "CYBERSECURITY",
@@ -128,6 +105,7 @@ async function main() {
       data: {
         email: "samandar4",
         passwordHash: volPasswords[3],
+        passwordPlain: volPlainPasswords[3],
         fullName: "Samandar",
         region: "JIZZAKH",
         role: "AI_ML",
@@ -141,6 +119,7 @@ async function main() {
       data: {
         email: "javohir5",
         passwordHash: volPasswords[4],
+        passwordPlain: volPlainPasswords[4],
         fullName: "Javohir Rustamjonov",
         region: "KHOREZM",
         role: "FULLSTACK",
@@ -154,6 +133,7 @@ async function main() {
       data: {
         email: "mirafzal6",
         passwordHash: volPasswords[5],
+        passwordPlain: volPlainPasswords[5],
         fullName: "Mirafzal Rustamjonov",
         region: "NAVOIY",
         role: "CYBERSECURITY",
@@ -167,6 +147,7 @@ async function main() {
       data: {
         email: "elbek7",
         passwordHash: volPasswords[6],
+        passwordPlain: volPlainPasswords[6],
         fullName: "Elbek Aliyev",
         region: "KASHKADARYA",
         role: "AI_ML",
@@ -180,6 +161,7 @@ async function main() {
       data: {
         email: "abdulloh8",
         passwordHash: volPasswords[7],
+        passwordPlain: volPlainPasswords[7],
         fullName: "Abdulloh",
         region: "TASHKENT",
         role: "BACKEND",
@@ -193,6 +175,7 @@ async function main() {
       data: {
         email: "akbarov9",
         passwordHash: volPasswords[8],
+        passwordPlain: volPlainPasswords[8],
         fullName: "Akbarov Diyorbek",
         region: "ANDIJAN",
         role: "AI_ML",
@@ -206,6 +189,7 @@ async function main() {
       data: {
         email: "azimboyev10",
         passwordHash: volPasswords[9],
+        passwordPlain: volPlainPasswords[9],
         fullName: "Azimboyev Faxriyor",
         region: "SAMARKAND",
         role: "BACKEND",
@@ -219,6 +203,7 @@ async function main() {
       data: {
         email: "muhammadqodir11",
         passwordHash: volPasswords[10],
+        passwordPlain: volPlainPasswords[10],
         fullName: "Muhammadqodir Turobov",
         region: "BUKHARA",
         role: "PM",
@@ -232,6 +217,7 @@ async function main() {
       data: {
         email: "roxmatullox12",
         passwordHash: volPasswords[11],
+        passwordPlain: volPlainPasswords[11],
         fullName: "Roxmatullox Shirinov",
         region: "FERGANA",
         role: "AI_ML",
@@ -245,6 +231,7 @@ async function main() {
       data: {
         email: "obidov13",
         passwordHash: volPasswords[12],
+        passwordPlain: volPlainPasswords[12],
         fullName: "Obidov Nabijon",
         region: "NAMANGAN",
         role: "CYBERSECURITY",
@@ -258,6 +245,7 @@ async function main() {
       data: {
         email: "abdumajidov14",
         passwordHash: volPasswords[13],
+        passwordPlain: volPlainPasswords[13],
         fullName: "Abdumajidov Sardor",
         region: "JIZZAKH",
         role: "CYBERSECURITY",
@@ -271,6 +259,7 @@ async function main() {
       data: {
         email: "behruz15",
         passwordHash: volPasswords[14],
+        passwordPlain: volPlainPasswords[14],
         fullName: "Bekhruz Tadjiev",
         region: "KHOREZM",
         role: "AI_ML",
@@ -284,6 +273,7 @@ async function main() {
       data: {
         email: "baxodirov16",
         passwordHash: volPasswords[15],
+        passwordPlain: volPlainPasswords[15],
         fullName: "Baxodirov Muhammadamin",
         region: "NAVOIY",
         role: "AI_ML",
@@ -297,6 +287,7 @@ async function main() {
       data: {
         email: "akbar17",
         passwordHash: volPasswords[16],
+        passwordPlain: volPlainPasswords[16],
         fullName: "Akbar Mamayusupov",
         region: "TASHKENT",
         role: "AI_ML",
@@ -310,6 +301,7 @@ async function main() {
       data: {
         email: "nodira18",
         passwordHash: volPasswords[17],
+        passwordPlain: volPlainPasswords[17],
         fullName: "Nodira Qodirova",
         region: "ANDIJAN",
         role: "BACKEND",
@@ -323,6 +315,7 @@ async function main() {
       data: {
         email: "soginchbek19",
         passwordHash: volPasswords[18],
+        passwordPlain: volPlainPasswords[18],
         fullName: "Sog'inchbek",
         region: "SAMARKAND",
         role: "PM",
@@ -336,6 +329,7 @@ async function main() {
       data: {
         email: "xamidov20",
         passwordHash: volPasswords[19],
+        passwordPlain: volPlainPasswords[19],
         fullName: "Xamidov Abdulaziz",
         region: "FERGANA",
         role: "CYBERSECURITY",
@@ -349,6 +343,7 @@ async function main() {
       data: {
         email: "ozodov21",
         passwordHash: volPasswords[20],
+        passwordPlain: volPlainPasswords[20],
         fullName: "Ozodov NurAziz",
         region: "KHOREZM",
         role: "DESIGNER",
@@ -362,6 +357,7 @@ async function main() {
       data: {
         email: "davron22",
         passwordHash: volPasswords[21],
+        passwordPlain: volPlainPasswords[21],
         fullName: "Davron Yuldashbaev",
         region: "NAVOIY",
         role: "MOBILE",
@@ -375,6 +371,7 @@ async function main() {
       data: {
         email: "abdullayev23",
         passwordHash: volPasswords[22],
+        passwordPlain: volPlainPasswords[22],
         fullName: "Abdullayev Akobir",
         region: "ANDIJAN",
         role: "AI_ML",
@@ -388,6 +385,7 @@ async function main() {
       data: {
         email: "siddiqjonov24",
         passwordHash: volPasswords[23],
+        passwordPlain: volPlainPasswords[23],
         fullName: "Siddiqjonov Suhrobbek",
         region: "SAMARKAND",
         role: "AI_ML",
@@ -401,6 +399,7 @@ async function main() {
       data: {
         email: "komron25",
         passwordHash: volPasswords[24],
+        passwordPlain: volPlainPasswords[24],
         fullName: "Komron",
         region: "BUKHARA",
         role: "DESIGNER",
@@ -414,6 +413,7 @@ async function main() {
       data: {
         email: "shohjahon26",
         passwordHash: volPasswords[25],
+        passwordPlain: volPlainPasswords[25],
         fullName: "Shohjahon",
         region: "FERGANA",
         role: "DATA_ANALYST",
@@ -427,6 +427,7 @@ async function main() {
       data: {
         email: "muhammad27",
         passwordHash: volPasswords[26],
+        passwordPlain: volPlainPasswords[26],
         fullName: "Muhammad Fazliddin Samadov",
         region: "NAMANGAN",
         role: "DESIGNER",
@@ -440,6 +441,7 @@ async function main() {
       data: {
         email: "valiyev28",
         passwordHash: volPasswords[27],
+        passwordPlain: volPlainPasswords[27],
         fullName: "Valiyev Jasurbek",
         region: "JIZZAKH",
         role: "AI_ML",
@@ -453,6 +455,7 @@ async function main() {
       data: {
         email: "yarasheva29",
         passwordHash: volPasswords[28],
+        passwordPlain: volPlainPasswords[28],
         fullName: "Yarasheva Rayhona",
         region: "KHOREZM",
         role: "AI_ML",
@@ -466,6 +469,7 @@ async function main() {
       data: {
         email: "ezoza30",
         passwordHash: volPasswords[29],
+        passwordPlain: volPlainPasswords[29],
         fullName: "Ezoza Zaxidova",
         region: "TASHKENT",
         role: "FRONTEND",
@@ -479,6 +483,7 @@ async function main() {
       data: {
         email: "islombek31",
         passwordHash: volPasswords[30],
+        passwordPlain: volPlainPasswords[30],
         fullName: "Islombek Abdumutalibov",
         region: "ANDIJAN",
         role: "DESIGNER",
@@ -492,6 +497,7 @@ async function main() {
       data: {
         email: "hasanxon32",
         passwordHash: volPasswords[31],
+        passwordPlain: volPlainPasswords[31],
         fullName: "Hasanxon Savriddinov",
         region: "SAMARKAND",
         role: "CYBERSECURITY",
@@ -505,6 +511,7 @@ async function main() {
       data: {
         email: "full33",
         passwordHash: volPasswords[32],
+        passwordPlain: volPlainPasswords[32],
         fullName: "Full  Abadov Faridun",
         region: "KHOREZM",
         role: "PM",
@@ -518,6 +525,7 @@ async function main() {
       data: {
         email: "shohruh34",
         passwordHash: volPasswords[33],
+        passwordPlain: volPlainPasswords[33],
         fullName: "Shohruh O'sarov",
         region: "NAVOIY",
         role: "AI_ML",
@@ -531,6 +539,7 @@ async function main() {
       data: {
         email: "akmalnorkulovv35",
         passwordHash: volPasswords[34],
+        passwordPlain: volPlainPasswords[34],
         fullName: "akmal_norkulovv",
         region: "KASHKADARYA",
         role: "FRONTEND",
@@ -544,6 +553,7 @@ async function main() {
       data: {
         email: "umarov36",
         passwordHash: volPasswords[35],
+        passwordPlain: volPlainPasswords[35],
         fullName: "Umarov Abdulloh",
         region: "TASHKENT",
         role: "BACKEND",
@@ -557,6 +567,7 @@ async function main() {
       data: {
         email: "rahim37",
         passwordHash: volPasswords[36],
+        passwordPlain: volPlainPasswords[36],
         fullName: "Rahim Rakhimov",
         region: "ANDIJAN",
         role: "AI_ML",
@@ -570,6 +581,7 @@ async function main() {
       data: {
         email: "goyibnazarov38",
         passwordHash: volPasswords[37],
+        passwordPlain: volPlainPasswords[37],
         fullName: "G'oyibnazarov Sohibjon",
         region: "SAMARKAND",
         role: "FRONTEND",
@@ -583,6 +595,7 @@ async function main() {
       data: {
         email: "husniyor39",
         passwordHash: volPasswords[38],
+        passwordPlain: volPlainPasswords[38],
         fullName: "Husniyor Azimboyev",
         region: "FERGANA",
         role: "BACKEND",
@@ -596,6 +609,7 @@ async function main() {
       data: {
         email: "sarvarbek40",
         passwordHash: volPasswords[39],
+        passwordPlain: volPlainPasswords[39],
         fullName: "Tursunaliev Sarvarbek",
         region: "TASHKENT",
         role: "CYBERSECURITY",
