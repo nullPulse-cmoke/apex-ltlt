@@ -1,6 +1,37 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# ===== APEX Security & Git Ignore Configuration =====
 
-# dependencies
+# Environment variables & secrets (CRITICAL)
+.env
+.env*
+!.env.example
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Keys, certificates, and credentials (CRITICAL)
+*.pem
+*.key
+*.p12
+*.crt
+*.cer
+*.pfx
+*.asc
+id_rsa*
+id_ed25519*
+id_dsa*
+
+# Local SQLite databases & dumps (CRITICAL)
+*.db
+*.db-journal
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.dump
+prisma/*.db
+
+# Dependencies
 /node_modules
 /.pnp
 .pnp.*
@@ -10,43 +41,30 @@
 !.yarn/releases
 !.yarn/versions
 
-# testing
-/coverage
-
-# next.js
+# Next.js & Build outputs
 /.next/
 /out/
-
-# production
 /build
+*.tsbuildinfo
+next-env.d.ts
 
-# misc
-.DS_Store
-*.pem
+# Testing & Coverage
+/coverage
 
-# debug
+# Logs & Debugging
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
+# OS & Temp Files
+.DS_Store
+Thumbs.db
 
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-
-# sqlite
-*.db*
-*.db-journal
-*.db-shm
-*.db-wal
-
-# local temp configs and credentials
+# Local temp configs and credentials
 /volunteers_messages.txt
 /nginx-default
 
+# Vercel
+.vercel
